@@ -11,15 +11,17 @@
 # propagated, or distributed except according to the terms contained in the
 # LICENSE file.
 
-"""Pull the latest block in from a Dogecoin testnet client"""
+"""Pull the latest block in from a VCoin testnet client"""
 
+# import sys
 import os.path
 
 import altcoin
 from altcoin.rpc import AltcoinProxy
 
-# Select Dogecoin test network
-altcoin.SelectParams('bb0a78264637406b6360aad926284d544d7049f45189db5664f3c4d07350559e')
-
-rpc = AltcoinProxy(service_port=44555, btc_conf_file=os.path.expanduser('~/.dogecoin/dogecoin.conf'))
+# Select VCoin test network
+altcoin.SelectParams('000007e14c52364cee2d4d9483541d473e3e73c896df75882273b91313b44816')
+# Set up RPC connection
+rpc = AltcoinProxy(service_port=55535, btc_conf_file=os.path.expanduser('~/.vcoincore/vcoin.conf'))
+# Get new address
 print(rpc.getnewaddress('python-altcoinlib example'))

@@ -15,30 +15,33 @@
 
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import json
-import os
-import platform
-import sys
+# import json
+# import os
+# import platform
+# import sys
 try:
     import urllib.parse as urlparse
 except ImportError:
     import urlparse
+    assert urlparse is not None
 
 from altcoin.core import CAltcoinBlock
-import bitcoin
-from bitcoin.rpc import hexlify, unhexlify, JSONRPCException, Proxy
-from bitcoin.core import COIN, lx, b2lx, CTransaction, COutPoint, CTxOut
-from bitcoin.core.script import CScript
-from bitcoin.wallet import CBitcoinAddress, CBitcoinSecret
+# import bitcoin
+# from bitcoin.rpc import hexlify
+from bitcoin.rpc import unhexlify, JSONRPCException, Proxy
+from bitcoin.core import b2lx  # , COIN, lx, CTransaction, COutPoint, CTxOut
+# from bitcoin.core.script import CScript
+# from bitcoin.wallet import CBitcoinAddress, CBitcoinSecret
 
 DEFAULT_HTTP_TIMEOUT = 30
 
+
 class AltcoinProxy(Proxy):
     def __init__(self, service_url=None,
-                       service_port=None,
-                       btc_conf_file=None,
-                       timeout=DEFAULT_HTTP_TIMEOUT,
-                       **kwargs):
+                 service_port=None,
+                 btc_conf_file=None,
+                 timeout=DEFAULT_HTTP_TIMEOUT,
+                 **kwargs):
         """Create a proxy to a bitcoin-like RPC service
 
         Unlike RawProxy data is passed as objects, rather than JSON. (not yet
@@ -69,12 +72,12 @@ class AltcoinProxy(Proxy):
             block_hash = b2lx(block_hash)
         except TypeError:
             raise TypeError('%s.getblock(): block_hash must be bytes; got %r instance' %
-                    (self.__class__.__name__, block_hash.__class__))
+                            (self.__class__.__name__, block_hash.__class__))
         try:
             r = self._call('getblock', block_hash, False)
         except JSONRPCException as ex:
             raise IndexError('%s.getblock(): %s (%d)' %
-                    (self.__class__.__name__, ex.error['message'], ex.error['code']))
+                             (self.__class__.__name__, ex.error['message'], ex.error['code']))
         return CAltcoinBlock.deserialize(unhexlify(r))
 
 __all__ = (

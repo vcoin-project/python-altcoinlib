@@ -13,13 +13,13 @@
 
 """Burns any Dogecoin inputs below 1 DOGE"""
 
-import sys
 import os.path
 
 import altcoin
 from altcoin.rpc import AltcoinProxy
 from bitcoin.core import *
 from bitcoin.core.script import *
+
 
 def burn_txins(rpc, quantity, txins):
     burn_script = CScript(
@@ -28,7 +28,7 @@ def burn_txins(rpc, quantity, txins):
         ]
     )
 
-    burn_quantity = quantity / 2.0 # We burn half, and give half to the miners
+    burn_quantity = quantity / 2.0  # We burn half, and give half to the miners
     # Sign and relay a transaction burning the inputs
     txouts = [CTxOut(burn_quantity, burn_script)]
     tx = CMutableTransaction(txins, txouts)

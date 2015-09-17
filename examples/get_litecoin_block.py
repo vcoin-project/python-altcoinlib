@@ -13,7 +13,6 @@
 
 """Pull the latest block in from a Litecoin testnet client"""
 
-import sys
 import os.path
 
 import altcoin
@@ -24,4 +23,4 @@ altcoin.SelectParams('f5ae71e26c74beacc88382716aced69cddf3dffff24f384e1808905e01
 
 rpc = AltcoinProxy(service_port=19332, btc_conf_file=os.path.expanduser('~/.litecoin/litecoin.conf'))
 best_block_hash = rpc.getblockchaininfo()['bestblockhash']
-print rpc.getblock(lx(best_block_hash))
+print(rpc.getblock(lx(best_block_hash)))

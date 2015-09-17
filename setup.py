@@ -10,7 +10,7 @@ with open(os.path.join(here, 'README')) as f:
 requires = ['python-bitcoinlib']
 
 setup(name='python-altcoinlib',
-      version='0.0.1-SNAPSHOT',
+      version='0.0.2',
       description='This python library provides an easy interface to cryptocurrency data structures and protocol.',
       long_description=README,
       classifiers=[
@@ -22,4 +22,4 @@ setup(name='python-altcoinlib',
       zip_safe=False,
       install_requires=requires,
       test_suite="altcoin.tests"
-     )
+      )

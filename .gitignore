@@ -4,4 +4,5 @@
 local*.cfg
 
 build/
-python_bitcoinlib.egg-info/
+/dist/
+/python_altcoinlib.egg-info/
