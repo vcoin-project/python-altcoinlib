@@ -1,0 +1,29 @@
+# http://travis-ci.org/#!/gjhiggins/python-altcoinlib
+language: python
+branches:
+  only:
+    - master
+
+python:
+    - 2.6
+    - 2.7
+    - 3.3
+    - 3.4
+    - pypy
+
+install:
+    - pip install -r requirements.txt
+    - python setup.py install
+
+before_script:
+    - flake8 --exit-zero altcoin
+
+script:
+    - tox
+
+after_success:
+    - if [[ $HAS_COVERALLS ]] ; then coveralls ; fi
+
+notifications:
+    irc:
+        channels: "chat.freenode.net#altcoin"

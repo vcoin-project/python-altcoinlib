@@ -6,3 +6,5 @@ local*.cfg
 build/
 /dist/
 /python_altcoinlib.egg-info/
+/.tox/
+/.coverage
